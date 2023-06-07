@@ -32,3 +32,6 @@
 
 # Ignore ENV variables
 /config/env_variables.rb
+
+# Ignore node_modules
+node_modules/
