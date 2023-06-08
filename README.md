@@ -92,9 +92,9 @@ To run the project, execute the following commands:
 
 ## 🔭 Future Features <a name="future-features"></a>
 
-- [ ] Creating a data model
-- [ ] Validations and Model specs
-- [ ] Processing data in models
+- [x] Creating a data model
+- [x] Processing data in models
+- [x] Validations and Model specs
 - [ ] Setup and controllers
 - [ ] Controllers specs
 - [ ] Views
