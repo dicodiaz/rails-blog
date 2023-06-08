@@ -3,6 +3,10 @@ class Post < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
 
+  validates :title, presence: true, length: { in: 1..250 }
+  validates :comments_counter, numericality: { greater_than_or_equal_to: 0 }
+  validates :likes_counter, numericality: { greater_than_or_equal_to: 0 }
+
   # Should never be executed because there's a counter cache
   def self.update_posts_counter(user)
     user.update(posts_counter: where(author_id: user.id).count)
