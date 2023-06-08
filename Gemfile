@@ -65,10 +65,9 @@ group :development do
 end
 
 group :test do
-  # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
-  gem 'capybara'
-  gem 'selenium-webdriver'
-  gem 'webdrivers'
+  gem 'rspec-rails'
 end
 
-gem 'rubocop', '>= 1.0', '< 2.0'
+group :linter do
+  gem 'rubocop', '>= 1.0', '< 2.0'
+end
