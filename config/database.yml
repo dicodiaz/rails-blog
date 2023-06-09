@@ -32,7 +32,7 @@ development:
   #username: rails_blog
 
   # The password associated with the postgres role (username).
-  password: <%= ENV["RAILSBLOG_DEV_DB_PW"] %>
+  password: <%= ENV["RAILS_BLOG_DEV_DB_PW"] %>
 
   # Connect on a TCP socket. Omitted by default since the client uses a
   # domain socket that doesn't need configuration. Windows does not have
@@ -58,6 +58,7 @@ development:
 test:
   <<: *default
   database: rails_blog_test
+  password: <%= ENV["RAILS_BLOG_TEST_DB_PW"] %>
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
