@@ -3,6 +3,9 @@
     "stylelint": "npx stylelint \"**/*.{css,scss}\""
   },
   "devDependencies": {
+    "@prettier/plugin-ruby": "^1.5.5",
+    "prettier": "^2.2.0",
+    "prettier-plugin-erb": "^0.4.0",
     "stylelint": "^13.13.1",
     "stylelint-config-standard": "^21.0.0",
     "stylelint-csstree-validator": "^1.9.0",
