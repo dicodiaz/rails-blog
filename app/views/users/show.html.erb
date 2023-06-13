@@ -1,1 +1,13 @@
-<h1>Here are the details of the user#<%= @user_id %></h1>
+<main>
+  <%= render '/user_card', user: @user %>
+  <h3>Bio</h3>
+  <p><%= @user.bio %></p>
+  <section>
+    <% @user.three_most_recent_posts.each do |post| %>
+      <a href="<%= @user.id %>/posts/<%= post.id %>">
+        <%= render '/post_card', post: %>
+      <a>
+    <% end %>
+    <a href="<%= @user.id %>/posts">See all posts</a>
+  </section>
+</main>
