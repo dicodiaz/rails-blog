@@ -72,3 +72,5 @@ end
 group :linter do
   gem 'rubocop', '>= 1.0', '< 2.0'
 end
+
+gem 'bootstrap', '~> 5.3.0.alpha3'
