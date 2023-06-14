@@ -1,5 +1,5 @@
 <main class="container my-3">
-  <div class="row mb-3">
+  <section class="row mb-3">
     <div class="col">
       <h5><%= @post.title %></h5>
       <h6>by <%= @user.name %></h6>
@@ -7,11 +7,13 @@
     <div class="col-6 text-end d-flex flex-column justify-content-center">
       <small>Comments: <%= @post.comments_counter %>, Likes: <%= @post.likes_counter %></small>
     </div>
-  </div>
-  <p class="px-2"><%= @post.text %></p>
-  <div class="px-3">
-    <% @post.comments.sort.each do |comment| %>
-      <%= render '/comment', comment: %>
-    <% end %>
-  </div>
+  </section>
+  <section>
+    <p class="px-2"><%= @post.text %></p>
+    <div class="px-3">
+      <% @post.comments.sort.each do |comment| %>
+        <%= render '/comment', comment: %>
+      <% end %>
+    </div>
+  </section>
 </main>

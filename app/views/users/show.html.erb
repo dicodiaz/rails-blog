@@ -1,7 +1,9 @@
 <main class="container my-3">
   <%= render '/user_card', user: @user %>
-  <h5>Bio</h5>
-  <p><%= @user.bio %></p>
+  <article>
+    <h5>Bio</h5>
+    <p><%= @user.bio %></p>
+  <article>
   <section>
     <% @user.three_most_recent_posts.each do |post| %>
       <a href="<%= @user.id %>/posts/<%= post.id %>">
