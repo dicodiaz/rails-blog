@@ -11,6 +11,13 @@
   </head>
 
   <body>
-    <%= yield %>
+    <main role="main" class="container mt-3">
+      <% flash.each do |key, message| %>
+        <div class="alert <%= flash_class(key) %> text-center" role="alert">
+          <%= message %>
+        </div>
+      <% end %>
+      <%= yield %>
+    </main>
   </body>
 </html>
