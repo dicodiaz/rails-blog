@@ -1,7 +1,9 @@
-<main>
-  <% @users.each do |user| %>
-    <a href="users/<%= user.id %>">
-      <%= render '/user_card', user: %>
-    <a>
-  <% end %>
+<main class="container mt-3">
+  <div class="row row-cols-1">
+    <% @users.each do |user| %>
+      <a class="col" href="users/<%= user.id %>">
+        <%= render '/user_card', user: %>
+      <a>
+    <% end %>
+  </div class="row">
 </main>

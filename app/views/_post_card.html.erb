@@ -1,5 +1,11 @@
-<div>
-  <h3><%= post.title %></h3>
-  <p><%= post.text %></p>
-  <small>Comments: <%= post.comments_counter %>, Likes: <%= post.likes_counter %></small>
-</div>
+<article class="card mb-3">
+  <div class="card-body">
+    <h3 class="card-title"><%= post.title %></h3>
+    <p class="card-text text-truncate mb-1"><%= post.text %></p>
+    <p class="mb-0 text-end">
+      <small class="text-body-secondary">
+        Comments: <%= post.comments_counter %>, Likes: <%= post.likes_counter %>
+      </small>
+    </p>
+  </div>
+</article>

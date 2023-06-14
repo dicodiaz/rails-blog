@@ -1,4 +1,4 @@
-<main>
+<main class="container my-3">
   <%= render '/user_card', user: @user %>
   <h3>Bio</h3>
   <p><%= @user.bio %></p>
@@ -8,6 +8,8 @@
         <%= render '/post_card', post: %>
       <a>
     <% end %>
-    <a href="<%= @user.id %>/posts">See all posts</a>
+    <div class="d-flex justify-content-center">
+      <a class="btn btn-primary" href="<%= @user.id %>/posts">See all posts</a>
+    </div>
   </section>
 </main>
