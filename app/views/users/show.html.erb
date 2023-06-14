@@ -6,12 +6,10 @@
   <article>
   <section>
     <% @user.three_most_recent_posts.each do |post| %>
-      <a href="<%= @user.id %>/posts/<%= post.id %>">
-        <%= render '/post_card', post: %>
-      <a>
+      <%= link_to render('/post_card', post:), user_post_path(@user.id, post.id) %>
     <% end %>
     <div class="d-flex justify-content-center">
-      <a class="btn btn-primary" href="<%= @user.id %>/posts">See all posts</a>
+      <%= link_to 'See all posts', user_posts_path(@user.id), class: 'btn btn-primary' %>
     </div>
   </section>
 </main>

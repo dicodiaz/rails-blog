@@ -2,9 +2,7 @@
   <%= render '/user_card', user: @user %>
   <% @user.posts.sort.each do |post| %>
     <section class="mb-5">
-      <a href="posts/<%= post.id %>">
-        <%= render '/post_card', post: %>
-      <a>
+      <%= link_to render('/post_card', post:), user_post_path(@user.id, post.id) %>
       <div class="px-3">
         <% post.five_most_recent_comments.each do |comment| %>
           <%= render '/comment', comment: %>
