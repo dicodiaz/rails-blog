@@ -1,6 +1,6 @@
 <main class="container my-3">
   <%= render '/user_card', user: @user %>
-  <h3>Bio</h3>
+  <h5>Bio</h5>
   <p><%= @user.bio %></p>
   <section>
     <% @user.three_most_recent_posts.each do |post| %>

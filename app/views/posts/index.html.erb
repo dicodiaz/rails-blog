@@ -1,11 +1,13 @@
-<main>
+<main class="container mt-3">
   <%= render '/user_card', user: @user %>
   <% @user.posts.sort.each do |post| %>
     <a href="posts/<%= post.id %>">
       <%= render '/post_card', post: %>
     <a>
-    <% post.five_most_recent_comments.each do |comment| %>
-      <%= render '/comment', comment: %>
-    <% end %>
+    <div class="px-3 mb-5">
+      <% post.five_most_recent_comments.each do |comment| %>
+        <%= render '/comment', comment: %>
+      <% end %>
+    </div>
   <% end %>
 </main>
