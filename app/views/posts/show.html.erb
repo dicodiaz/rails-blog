@@ -1,1 +1,8 @@
-<h1>Here are the details of the post#<%= @post_id %> by user#<%= @user_id %></h1>
+<main>
+  <h3><%= @post.title %> by <%= @user.name %></h3>
+  <small>Comments: <%= @post.comments_counter %>, Likes: <%= @post.likes_counter %></small>
+  <p><%= @post.text %></p>
+  <% @post.comments.sort.each do |comment| %>
+    <%= render '/comment', comment: %>
+  <% end %>
+</main>

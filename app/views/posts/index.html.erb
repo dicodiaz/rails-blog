@@ -1,1 +1,11 @@
-<h1>Here is a list of the user#<%= @user_id %>'s posts</h1>
+<main>
+  <%= render '/user_card', user: @user %>
+  <% @user.posts.sort.each do |post| %>
+    <a href="posts/<%= post.id %>">
+      <%= render '/post_card', post: %>
+    <a>
+    <% post.five_most_recent_comments.each do |comment| %>
+      <%= render '/comment', comment: %>
+    <% end %>
+  <% end %>
+</main>

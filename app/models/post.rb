@@ -13,6 +13,6 @@ class Post < ApplicationRecord
   end
 
   def five_most_recent_comments
-    Comment.where(post_id: id).order(updated_at: :desc).limit(5)
+    Comment.where(post_id: id).order(updated_at: :desc).limit(5).sort_by(&:updated_at)
   end
 end
