@@ -1,1 +1,17 @@
-<h1>Here are the details of the user#<%= @user_id %></h1>
+<main class="container my-3">
+  <%= render '/user_card', user: @user %>
+  <article>
+    <h5>Bio</h5>
+    <p><%= @user.bio %></p>
+  <article>
+  <section>
+    <% @user.three_most_recent_posts.each do |post| %>
+      <a href="<%= @user.id %>/posts/<%= post.id %>">
+        <%= render '/post_card', post: %>
+      <a>
+    <% end %>
+    <div class="d-flex justify-content-center">
+      <a class="btn btn-primary" href="<%= @user.id %>/posts">See all posts</a>
+    </div>
+  </section>
+</main>

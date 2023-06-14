@@ -95,9 +95,9 @@ To run the project, execute the following commands:
 - [x] Creating a data model
 - [x] Processing data in models
 - [x] Validations and Model specs
-- [ ] Setup and controllers
-- [ ] Controllers specs
-- [ ] Views
+- [x] Setup and controllers
+- [x] Controllers specs
+- [x] Views
 - [ ] Forms
 - [ ] Integration specs for Views and fixing n+1 problems
 - [ ] Add Devise
