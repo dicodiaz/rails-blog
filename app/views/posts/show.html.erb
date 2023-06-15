@@ -1,4 +1,4 @@
-<section class="row mb-3">
+<section class="row mb-2">
   <div class="col">
     <h5><%= @post.title %></h5>
     <h6>by <%= @user.name %></h6>
@@ -6,9 +6,10 @@
   <div class="col-6 text-end d-flex flex-column justify-content-center">
     <small>Comments: <%= @post.comments_counter %>, Likes: <%= @post.likes_counter %></small>
   </div>
-  <p class="px-3"><%= @post.text %></p>
+  <p class="px-3 mb-0"><%= @post.text %></p>
 </section>
 <section class="mb-3">
+  <%= render 'like' %>
   <%= render "comment_form" %>
   <div class="px-3">
     <% @post.comments.sort.each do |comment| %>

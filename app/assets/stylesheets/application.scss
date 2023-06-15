@@ -1,6 +1,7 @@
 // Custom bootstrap variables must be set or imported *before* bootstrap.
 @import 'bootstrap';
 @import 'rails_bootstrap_forms';
+@import 'font-awesome';
 
 a {
   color: inherit;
@@ -9,4 +10,10 @@ a {
 
 .mt-neg {
   margin-top: -60px;
+}
+
+.heart-wrapper {
+  border: none;
+  padding-inline: 0px;
+  background-color: inherit;
 }
