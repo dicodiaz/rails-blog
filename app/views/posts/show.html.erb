@@ -6,9 +6,10 @@
   <div class="col-6 text-end d-flex flex-column justify-content-center">
     <small>Comments: <%= @post.comments_counter %>, Likes: <%= @post.likes_counter %></small>
   </div>
+  <p class="px-3"><%= @post.text %></p>
 </section>
 <section class="mb-3">
-  <p class="px-2"><%= @post.text %></p>
+  <%= render "comment_form" %>
   <div class="px-3">
     <% @post.comments.sort.each do |comment| %>
       <%= render '/comment', comment: %>

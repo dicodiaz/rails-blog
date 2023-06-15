@@ -1,0 +1,7 @@
+<%= bootstrap_form_with model: Comment.new, local: true do |f| %>
+  <%= f.hidden_field :post_id, value: @post.id %>
+  <%= f.text_area :text, hide_label: true, placeholder: 'Write your comment...', rows: 4 %>
+  <div class="d-flex justify-content-end px-2 mb-4 mt-neg">
+    <%= f.primary 'Publish' %>
+  </div>
+<% end %>
