@@ -1,7 +1,6 @@
-<%= form_with model: Like.new, local: true do |f| %>
+<%= form_with model: @like, method: @like.id ? :delete : :post, local: true do |f| %>
   <%= f.hidden_field :post_id, value: @post.id %>
-  <%= f.hidden_field 'like', value: !@liked %>
   <button class="heart-wrapper px-0" type="submit">
-    <i class="<%= @liked ? 'fa-solid ' : 'fa-regular ' %>fa-heart fs-1 text-primary"></i>
+    <i class="<%= @like.id ? 'fa-solid ' : 'fa-regular ' %>fa-heart fs-1 text-primary"></i>
   </button>
 <% end %>

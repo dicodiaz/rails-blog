@@ -1,16 +1,18 @@
 class LikesController < ApplicationController
   def create
-    permitted_params = params.require(:like).permit(:post_id, :like)
-    post_id = permitted_params[:post_id]
-    if permitted_params[:like] == 'true'
-      Like.create(author: current_user, post_id:)
-    else
-      Like.delete_by(author: current_user, post_id:)
-    end
+    like = Like.create(like_params)
+    redirect_to user_post_url(current_user, like.post.id), flash: { notice: 'Post liked' }
+  end
 
-    @user = User.find(params[:user_id])
-    @post = Post.find(params[:id])
-    @liked = Like.exists?(author: current_user, post: @post)
-    render template: 'posts/show'
+  def destroy
+    like = Like.find(params[:id])
+    like.destroy
+    redirect_to user_post_url(current_user, like.post.id), flash: { warn: 'Post disliked' }
+  end
+
+  private
+
+  def like_params
+    params.require(:like).permit(:post_id).merge(author: current_user)
   end
 end
