@@ -1,0 +1,7 @@
+<%= bootstrap_form_with model: @post, local: true do |f| %>
+  <%= f.text_field :title %>
+  <%= f.text_area :text, hide_label: true, placeholder: 'Write your content...', rows: 20 %>
+  <div class="d-flex justify-content-center">
+    <%= f.primary %>
+  </div>
+<% end %>

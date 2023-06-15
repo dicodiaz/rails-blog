@@ -1,7 +1,8 @@
-<main class="container mt-3">
-  <div class="row row-cols-1">
-    <% @users.each do |user| %>
-      <%= link_to render('/user_card', user:), user_path(user.id) %>
-    <% end %>
-  </div class="row">
-</main>
+<div class="row row-cols-1">
+  <% @users.each do |user| %>
+    <%= link_to render('/user_card', user:), user_path(user.id) %>
+  <% end %>
+</div>
+<div class="d-flex justify-content-center">
+  <%= link_to 'New post', new_post_path, class: 'btn btn-primary' %>
+</div>
