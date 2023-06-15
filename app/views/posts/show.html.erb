@@ -9,8 +9,10 @@
   <p class="px-3 mb-0"><%= @post.text %></p>
 </section>
 <section class="mb-3">
-  <%= render 'like' %>
-  <%= render "comment_form" %>
+  <div class="row row-cols-auto justify-content-end mb-2">
+    <%= link_to render('comment_icon'), new_post_comment_path(@post.id) %>
+    <%= render 'like' %>
+  </div>
   <div class="px-3">
     <% @post.comments.sort.each do |comment| %>
       <%= render '/comment', comment: %>

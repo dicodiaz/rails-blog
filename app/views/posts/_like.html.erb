@@ -1,4 +1,4 @@
-<%= form_with model: Like.new, local: true, class: 'd-flex justify-content-end mb-2' do |f| %>
+<%= form_with model: Like.new, local: true do |f| %>
   <%= f.hidden_field :post_id, value: @post.id %>
   <%= f.hidden_field 'like', value: !@liked %>
   <button class="heart-wrapper px-0" type="submit">
