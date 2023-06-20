@@ -34,4 +34,49 @@ RSpec.describe User, type: :system do
       expect(page).to have_current_path(user_path(@user1.id))
     end
   end
+
+  describe 'show page' do
+    before(:each) do
+      Post.create(author: @user1, title: 'textitle', text: 'text')
+      Post.create(author: @user1, title: 'Title2', text: 'text2')
+      visit user_path(@user1)
+    end
+
+    it 'displays the user profile picture' do
+      expect(page).to have_xpath("//img[contains(@src,'assets/Dico.jpg')]")
+    end
+
+    it 'displays the user username' do
+      expect(page).to have_content(@user1.name)
+    end
+
+    it 'displays the number of posts the user has written' do
+      expect(page).to have_content('Number of posts: 2')
+    end
+
+    it 'displays the user bio' do
+      expect(page).to have_content(@user1.bio)
+    end
+
+    it 'displays the first 3 posts' do
+      @user1.posts.each do |post|
+        expect(page).to have_content(post.title)
+      end
+    end
+
+    it 'displays a button to view all of a user\'s posts' do
+      expect(page).to have_link('See all posts', href: user_posts_path(@user1))
+    end
+
+    it 'redirects to the post show page when a post is clicked' do
+      post = @user1.posts.first
+      click_link post.title
+      expect(page).to have_current_path(user_post_path(@user1.id, post.id))
+    end
+
+    it 'redirects to the user posts index page when "See all posts" is clicked' do
+      click_link 'See all posts'
+      expect(page).to have_current_path(user_posts_path(@user1))
+    end
+  end
 end
