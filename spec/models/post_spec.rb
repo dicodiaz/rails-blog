@@ -1,61 +1,64 @@
 require 'rails_helper'
 
 RSpec.describe Post, type: :model do
-  subject { Post.new(author: User.new, title: 'Title') }
+  before(:each) do
+    @user = User.create(name: 'user name', photo: '/assets/placeholder.png', bio: 'user bio')
+    @post = Post.create(author: @user, title: 'post title', text: 'post text')
+  end
 
   context 'validations' do
-    before(:each) { subject.save }
-
-    it('should be valid') { expect(subject).to be_valid }
+    it('should be valid') do
+      expect(@post).to be_valid
+    end
 
     it 'should be invalid when title is present' do
-      subject.title = nil
-      expect(subject).not_to be_valid
+      @post.title = nil
+      expect(@post).not_to be_valid
     end
 
     it 'should be invalid when title exceeds 250 characters' do
-      subject.title = 'a' * 251
-      expect(subject).not_to be_valid
+      @post.title = 'a' * 251
+      expect(@post).not_to be_valid
     end
 
     it 'should be invalid when comments_counter is less than zero' do
-      subject.comments_counter = -1
-      expect(subject).not_to be_valid
+      @post.comments_counter = -1
+      expect(@post).not_to be_valid
     end
 
     it 'should be invalid when likes_counter is less than zero' do
-      subject.likes_counter = -1
-      expect(subject).not_to be_valid
+      @post.likes_counter = -1
+      expect(@post).not_to be_valid
     end
   end
 
   context '#five_most_recent_comments' do
     before(:each) do
-      @comment1 = Comment.create(author: User.new, post: Post.new)
-      @comment2 = Comment.create(author: User.new, post: Post.new)
-      @comment3 = Comment.create(author: User.new, post: Post.new)
-      @comment4 = Comment.create(author: User.new, post: Post.new)
+      @comment1 = Comment.create(author: @user, post: @post)
+      @comment2 = Comment.create(author: @user, post: @post)
+      @comment3 = Comment.create(author: @user, post: @post)
+      @comment4 = Comment.create(author: @user, post: @post)
     end
 
     it "should return all the post's comments when there are 5 or fewer, sorted from newest to oldest" do
-      comments = subject.five_most_recent_comments
-      expect(comments).to eq([@comment4, @comment3, @comment2, @comment1])
+      comments = @post.five_most_recent_comments
+      expect(comments).to eq([@comment1, @comment2, @comment3, @comment4])
     end
 
     it "should return the post's 5 most recent comments when there more than 5, sorted from newest to oldest" do
-      comment5 = Comment.create(author: User.new, post: Post.new)
-      comment6 = Comment.create(author: User.new, post: Post.new)
-      comments = subject.five_most_recent_comments
-      expect(comments).to eq([comment6, comment5, @comment4, @comment3, @comment2])
+      comment5 = Comment.create(author: @user, post: @post)
+      comment6 = Comment.create(author: @user, post: @post)
+      comments = @post.five_most_recent_comments
+      expect(comments).to eq([@comment2, @comment3, @comment4, comment5, comment6])
     end
   end
 
   context '::update_posts_counter' do
     it 'should update the posts_counter for a given user' do
-      user = User.new(name: 'Dico Diaz')
-      Post.create(author: user, title: 'Title')
-      Post.update_posts_counter(user)
-      expect(user.posts_counter).to be(1)
+      expect(@user.posts_counter).to be(1)
+      Post.create(author: @user, title: 'post2 title', text: 'post2 text')
+      Post.update_posts_counter(@user)
+      expect(@user.posts_counter).to be(2)
     end
   end
 end
