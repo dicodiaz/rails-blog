@@ -10,7 +10,7 @@ RSpec.describe '/posts', type: :request do
     it('renders a successful response') { expect(response).to be_successful }
     it('renders the correct template') { expect(response).to render_template 'posts/index' }
     it("includes the correct placeholder text in the response's body") {
-      expect(response.body).to include("Here is a list of the user##{user.id}'s posts")
+      expect(response.body).to include(user.name)
     }
   end
 
@@ -20,7 +20,7 @@ RSpec.describe '/posts', type: :request do
     it('renders a successful response') { expect(response).to be_successful }
     it('renders the correct template') { expect(response).to render_template 'posts/show' }
     it("includes the correct placeholder text in the response's body") {
-      expect(response.body).to include("Here are the details of the post##{post.id} by user##{user.id}")
+      expect(response.body).to include(post.title)
     }
   end
 end

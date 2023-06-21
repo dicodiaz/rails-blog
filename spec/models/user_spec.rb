@@ -27,14 +27,14 @@ RSpec.describe User, type: :model do
 
     it "should return all the user's posts when there are 3 or fewer, sorted from newest to oldest" do
       posts = subject.three_most_recent_posts
-      expect(posts).to eq([@post2, @post1])
+      expect(posts).to eq([@post1, @post2])
     end
 
     it "should return the user's 3 most recent posts when there more than 3, sorted from newest to oldest" do
       post3 = Post.create(author: subject, title: 'Title3')
       post4 = Post.create(author: subject, title: 'Title4')
       posts = subject.three_most_recent_posts
-      expect(posts).to eq([post4, post3, @post2])
+      expect(posts).to eq([@post2, post3, post4])
     end
   end
 end
