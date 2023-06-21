@@ -59,8 +59,8 @@ RSpec.describe Post, type: :system do
 
     it 'displays a section for pagination if there are more than 2 posts' do
       expect(page).not_to have_content('Next')
-      post2 = Post.create(author: @user, title: 'post2 title', text: 'post2 text')
-      post3 = Post.create(author: @user, title: 'post3 title', text: 'post3 text')
+      Post.create(author: @user, title: 'post2 title', text: 'post2 text')
+      Post.create(author: @user, title: 'post3 title', text: 'post3 text')
       refresh
       expect(page).to have_content('Next')
     end
