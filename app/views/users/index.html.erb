@@ -1,8 +1,15 @@
+<% unless current_user %>
+  <%= button_to("Log In", new_user_session_path, method: :get, class: "btn btn-success mb-3") %>
+<% end %>
 <div class="row row-cols-1">
   <% @users.each do |user| %>
     <%= link_to render('/user_card', user:), user_path(user.id) %>
   <% end %>
 </div>
 <div class="d-flex justify-content-center">
-  <%= link_to 'New post', new_post_path, class: 'btn btn-primary' %>
+  <% if current_user %>
+    <%= link_to 'New post', new_post_path, class: 'btn btn-primary' %>
+  <% else %>
+    <div class="alert alert-warning text-center" role="alert">Log in to post</div>
+  <% end %>
 </div>
