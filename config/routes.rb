@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users,
+              controllers: {
+                sessions: 'users/sessions',
+                registrations: 'users/registrations'
+              }
   root to: redirect('/users', status: 302)
   resources :users, only: %i[index show] do
     resources :posts, only: %i[index show]
