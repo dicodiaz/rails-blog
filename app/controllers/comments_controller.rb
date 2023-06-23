@@ -1,16 +1,15 @@
 class CommentsController < ApplicationController
   skip_before_action :verify_authenticity_token
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: [:create]
 
   def index
     @post = Post.find(params[:post_id])
     @comments = @post.comments
     respond_to do |format|
-
-    format.json { render json: @comments }
+      format.json { render json: @comments }
     end
   end
-  
+
   def new
     @comment = Comment.new
     @post = Post.find(params[:post_id])
