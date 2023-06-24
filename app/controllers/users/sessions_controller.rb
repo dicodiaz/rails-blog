@@ -6,18 +6,30 @@ class Users::SessionsController < Devise::SessionsController
   private
 
   def respond_with(_resource, _opts = {})
-    render json: { message: 'Logged.' }, status: :ok
+    respond_to do |format|
+      format.json { render json: { message: 'Logged.' }, status: :ok }
+      format.any { super }
+    end
   end
 
   def respond_to_on_destroy
-    current_user ? log_out_success : log_out_failure
+    respond_to do |format|
+      format.json { current_user ? log_out_success : log_out_failure }
+      format.any { super }
+    end
   end
 
   def log_out_success
-    render json: { message: 'Logged out.' }, status: :ok
+    respond_to do |format|
+      format.json { render json: { message: 'Logged out.' }, status: :ok }
+      format.any { super }
+    end
   end
 
   def log_out_failure
-    render json: { message: 'Logged out failure.' }, status: :unauthorized
+    respond_to do |format|
+      format.json { render json: { message: 'Logged out failure.' }, status: :unauthorized }
+      format.any { super }
+    end
   end
 end
