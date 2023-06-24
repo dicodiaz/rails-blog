@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe '/posts', type: :request do
-  let!(:user) { User.create(name: 'Dico Diaz') }
-  let!(:post) { Post.create(author: user, title: 'Title') }
+  let!(:user) { User.create(name: 'user name', email: 'user_mail@mail.com', password: 'user_password') }
+  let!(:post) { Post.create(author: user, title: 'post title') }
 
   describe 'GET /users/:user_id/posts' do
     before(:each) { get user_posts_url(user.id) }

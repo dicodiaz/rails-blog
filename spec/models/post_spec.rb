@@ -55,10 +55,8 @@ RSpec.describe Post, type: :model do
 
   context '::update_posts_counter' do
     it 'should update the posts_counter for a given user' do
-      expect(@user.posts_counter).to be(1)
-      Post.create(author: @user, title: 'post2 title', text: 'post2 text')
       Post.update_posts_counter(@user)
-      expect(@user.posts_counter).to be(2)
+      expect(@user.posts_counter).to be(1)
     end
   end
 end

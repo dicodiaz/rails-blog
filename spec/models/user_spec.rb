@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  subject { User.new(name: 'Dico Diaz') }
+  subject { User.new(name: 'Dico Diaz', email: 'user_mail@mail.com', password: 'user_password') }
 
   context 'validations' do
     before(:each) { subject.save }
