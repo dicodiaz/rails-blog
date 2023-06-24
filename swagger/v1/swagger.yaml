@@ -1,0 +1,121 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/posts/{post_id}/comments.json":
+    get:
+      summary: Retrieve all comments for a given post
+      tags:
+      - Comments
+      parameters:
+      - name: post_id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Comments retrieved for given post id
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: number
+                  author_id:
+                    type: number
+                  post_id:
+                    type: number
+                  text:
+                    type: string
+                  created_at:
+                    type: string
+                  updated_at:
+                    type: string
+                required:
+                - author_id
+                - post_id
+  "/api/v1/pets":
+    post:
+      summary: Creates a pet
+      tags:
+      - Comments
+      parameters: []
+      responses:
+        '201':
+          description: pet created
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                photo_url:
+                  type: string
+                status:
+                  type: string
+              required:
+              - name
+              - status
+          application/xml:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                photo_url:
+                  type: string
+                status:
+                  type: string
+              required:
+              - name
+              - status
+  "/users/{user_id}/posts.json":
+    get:
+      summary: Retrieve all posts for a given user
+      tags:
+      - Posts
+      parameters:
+      - name: user_id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Posts retrieved for given user id
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: number
+                  author_id:
+                    type: number
+                  title:
+                    type: string
+                  text:
+                    type: string
+                  created_at:
+                    type: string
+                  updated_at:
+                    type: string
+                  comments_counter:
+                    type: number
+                  likes_counter:
+                    type: number
+                required:
+                - title
+servers:
+- url: http://{defaultHost}
+  variables:
+    defaultHost:
+      default: 127.0.0.1:3000/
