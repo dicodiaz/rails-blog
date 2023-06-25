@@ -3,7 +3,9 @@ class CommentsController < ApplicationController
   before_action :authenticate_user!, only: [:create]
 
   def index
-    @post = Post.find(params[:post_id])
+    @post = Post.find_by(id: params[:post_id])
+    return render_404('Post') unless @post
+
     @comments = @post.comments
     respond_to do |format|
       format.json { render json: @comments }
@@ -17,11 +19,22 @@ class CommentsController < ApplicationController
 
   def create
     @comment = Comment.new(comment_params)
-    if @comment.save
-      redirect_to user_post_url(current_user, @comment.post_id), flash: { success: 'Comment saved successfully' }
-    else
-      p flash.now[:error] = @comment.errors.full_messages.to_sentence.prepend('Error(s): ')
-      render :new, status: :unprocessable_entity
+    respond_to do |format|
+      format.html do
+        if @comment.save
+          redirect_to user_post_url(current_user, @comment.post_id), flash: { success: 'Comment saved successfully' }
+        else
+          p flash.now[:error] = @comment.errors.full_messages.to_sentence.prepend('Error(s): ')
+          render :new, status: :unprocessable_entity
+        end
+      end
+      format.json do
+        if @comment.save
+          render json: @comment.to_json, status: :created
+        else
+          render json: { error: @comment.errors.full_messages.to_sentence }, status: :unprocessable_entity
+        end
+      end
     end
   end
 

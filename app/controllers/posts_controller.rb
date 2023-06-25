@@ -1,6 +1,8 @@
 class PostsController < ApplicationController
   def index
-    @user = User.find(params[:user_id])
+    @user = User.find_by(id: params[:user_id])
+    return render_404('User') unless @user
+
     @posts = @user.posts.includes(:comments).sort
 
     respond_to do |format|
