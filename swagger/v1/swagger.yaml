@@ -5,10 +5,12 @@ info:
   version: v1
 paths:
   "/posts/{post_id}/comments.json":
-    get:
-      summary: Retrieve all comments for a given post
+    post:
+      summary: Creates a comment for a given post
       tags:
       - Comments
+      security:
+      - Bearer: []
       parameters:
       - name: post_id
         in: path
@@ -16,8 +18,8 @@ paths:
         schema:
           type: string
       responses:
-        '200':
-          description: Comments retrieved for given post id
+        '201':
+          description: Post created
           content:
             application/json:
               schema:
@@ -35,51 +37,100 @@ paths:
                     type: string
                   updated_at:
                     type: string
-                required:
-                - author_id
-                - post_id
-  "/api/v1/pets":
-    post:
-      summary: Creates a pet
-      tags:
-      - Comments
-      parameters: []
-      responses:
-        '201':
-          description: pet created
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
         '422':
-          description: invalid request
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
       requestBody:
         content:
           application/json:
             schema:
               type: object
               properties:
-                name:
+                text:
                   type: string
-                photo_url:
-                  type: string
-                status:
-                  type: string
-              required:
-              - name
-              - status
-          application/xml:
+    get:
+      summary: Retrieves all comments for a given post
+      tags:
+      - Comments
+      parameters:
+      - name: post_id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Comments retrieved for the given post
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: number
+                  author_id:
+                    type: number
+                  post_id:
+                    type: number
+                  text:
+                    type: string
+                  created_at:
+                    type: string
+                  updated_at:
+                    type: string
+        '404':
+          description: Post not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+  "/users/sign_in.json":
+    post:
+      summary: Logs in user
+      tags:
+      - Login
+      parameters: []
+      responses:
+        '200':
+          description: Logged
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+      requestBody:
+        content:
+          application/json:
             schema:
               type: object
               properties:
-                name:
+                email:
                   type: string
-                photo_url:
+                password:
                   type: string
-                status:
-                  type: string
-              required:
-              - name
-              - status
   "/users/{user_id}/posts.json":
     get:
-      summary: Retrieve all posts for a given user
+      summary: Retrieves all posts for a given user
       tags:
       - Posts
       parameters:
@@ -90,7 +141,7 @@ paths:
           type: string
       responses:
         '200':
-          description: Posts retrieved for given user id
+          description: Posts retrieved for the given user
           content:
             application/json:
               schema:
@@ -114,8 +165,26 @@ paths:
                     type: number
                 required:
                 - title
+        '404':
+          description: User not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
 servers:
 - url: http://{defaultHost}
   variables:
     defaultHost:
       default: 127.0.0.1:3000/
+components:
+  securitySchemes:
+    Bearer:
+      description: JWT key necessary to use API calls
+      type: apiKey
+      name: Authorization
+      in: header
+tags:
+- name: Login
