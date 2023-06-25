@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def render_404(model)
+  def render404(model)
     respond_to do |format|
       format.html { render file: "#{Rails.root}/public/404.html", layout: false, status: :not_found }
       format.json { render json: { error: "#{model} not found" }, status: :not_found }

@@ -14,4 +14,8 @@ class User < ApplicationRecord
   def three_most_recent_posts
     Post.where(author_id: id).order(updated_at: :desc).limit(3).sort_by(&:updated_at)
   end
+
+  def admin?
+    role == 'admin'
+  end
 end

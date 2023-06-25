@@ -4,7 +4,7 @@ class CommentsController < ApplicationController
 
   def index
     @post = Post.find_by(id: params[:post_id])
-    return render_404('Post') unless @post
+    return render404('Post') unless @post
 
     @comments = @post.comments
     respond_to do |format|
@@ -36,6 +36,11 @@ class CommentsController < ApplicationController
         end
       end
     end
+  end
+
+  def destroy
+    comment = Comment.destroy(params[:id])
+    redirect_to user_post_path(comment.post.author, comment.post)
   end
 
   private

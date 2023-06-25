@@ -83,4 +83,6 @@ gem 'rack-cors'
 
 gem 'devise-jwt'
 
-gem "rswag", "~> 2.9"
+gem 'rswag', '~> 2.9'
+
+gem 'cancancan', '~> 3.5'

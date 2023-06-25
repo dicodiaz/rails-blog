@@ -83,6 +83,7 @@ GEM
       actionpack (>= 6.0)
       activemodel (>= 6.0)
     builder (3.2.4)
+    cancancan (3.5.0)
     capybara (3.39.2)
       addressable
       matrix
@@ -333,6 +334,7 @@ DEPENDENCIES
   bootsnap
   bootstrap (~> 5.3.0.alpha3)
   bootstrap_form (~> 5.2)
+  cancancan (~> 3.5)
   capybara
   debug
   devise (~> 4.9)

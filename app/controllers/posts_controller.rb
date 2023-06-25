@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   def index
     @user = User.find_by(id: params[:user_id])
-    return render_404('User') unless @user
+    return render404('User') unless @user
 
     @posts = @user.posts.includes(:comments).sort
 
@@ -37,6 +37,11 @@ class PostsController < ApplicationController
       flash.now[:error] = @post.errors.full_messages.to_sentence.prepend('Error(s): ')
       render :new, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    post = Post.destroy(params[:id])
+    redirect_to user_posts_path(post.author)
   end
 
   private

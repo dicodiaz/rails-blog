@@ -1,3 +1,12 @@
-<p class="mb-1">
-  <span class="fw-bold"><%= comment.author.name %>:</span> <%= comment.text %>
-</p>
+<div class="row align-items-center mb-1">
+  <% if can? :destroy, comment %>
+    <div class="col-auto">
+      <%= button_to("Delete Comment", comment_path(comment), method: :delete, class: "btn btn-danger btn-sm") %>
+    </div>
+  <% end %>
+  <div class="col">
+    <p class="mb-0">
+      <span class="fw-bold"><%= comment.author.name %>:</span> <%= comment.text %>
+    </p>
+  </div>
+</div>

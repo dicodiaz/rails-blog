@@ -13,7 +13,10 @@
 </section>
 <section class="mb-3">
   <% if current_user %>
-    <div class="row row-cols-auto justify-content-end mb-2">
+    <div class="row row-cols-auto justify-content-end align-items-center mb-2">
+      <% if can? :destroy, @post %>
+        <%= button_to("Delete Post", post_path(@post), method: :delete, class: "btn btn-danger") %>
+      <% end %>
       <%= link_to render('comment_icon'), new_post_comment_path(@post.id) %>
       <%= render 'like' %>
     </div>
